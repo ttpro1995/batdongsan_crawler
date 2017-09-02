@@ -15,6 +15,8 @@ SPIDER_MODULES = ['batdongsan.spiders']
 NEWSPIDER_MODULE = 'batdongsan.spiders'
 FEED_EXPORT_ENCODING = 'utf-8' # make output in json become human readable utf-8
 CLOSESPIDER_PAGECOUNT = 10 # limit the number of page crawl
+LOG_LEVEL = 'INFO' # write less log
+
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'batdongsan (+http://www.yourdomain.com)'
