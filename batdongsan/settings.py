@@ -14,7 +14,12 @@ BOT_NAME = 'batdongsan'
 SPIDER_MODULES = ['batdongsan.spiders']
 NEWSPIDER_MODULE = 'batdongsan.spiders'
 FEED_EXPORT_ENCODING = 'utf-8' # make output in json become human readable utf-8
-CLOSESPIDER_PAGECOUNT = 10 # limit the number of page crawl
+
+# limit for spider. Spider close when any limit reach
+# 0 is unlimit
+CLOSESPIDER_PAGECOUNT = 0 # limit the number of page crawl
+CLOSESPIDER_ITEMCOUNT = 20 # limit number of item
+
 LOG_LEVEL = 'INFO' # write less log
 
 

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # vim:fenc=utf-8
 #
-# Copyright  2017 pi <pi@raspberrypi>
+# Copyright  2017 pi <Thai Thien>
 #
 # Distributed under terms of the MIT license.
 
@@ -10,6 +10,7 @@
 
 """
 import scrapy
+from bs4 import BeautifulSoup
 
 
 class BdsDetailSpider(scrapy.Spider):
@@ -24,11 +25,31 @@ class BdsDetailSpider(scrapy.Spider):
     
     def parse_detail(self, response):
         body_detail = response.css('.pm-content').css('.pm-desc').extract_first()
-        customeInfo = customerInfo = response.css('#divCustomerInfo')
+        body_detail = BeautifulSoup(body_detail, 'lxml').text
+        customerInfo = response.css('#divCustomerInfo')
         name = customerInfo.css('#LeftMainContent__productDetail_contactName').css('.right::text').extract_first()
+        address = customerInfo.css('#LeftMainContent__productDetail_contactAddress').css('.right::text').extract_first()
+        phone = customerInfo.css('#LeftMainContent__productDetail_contactPhone').css('.right::text').extract_first()
+        mobile = customerInfo.css('#LeftMainContent__productDetail_contactMobile').css('.right::text').extract_first()
+        
+        feature = response.css('.div-table').css('.table-detail').css('.row').css('.right::text').extract()
+        type_of_ads = feature[0]
+
+        # javascript protected  # email = customerInfo.css('#contactEmail').css('.right::text').extract_first()
+
         item = response.request.meta['item']
-        item['bodyDetail'] = body_detail
-        item['contactName'] = name
+        item['bodyDetail'] = body_detail.strip()
+        item['type'] = type_of_ads.strip()
+        if name is not None:
+            item['contactName'] = name.strip()
+        if address is not None:
+            item['address'] = address.strip()
+        if phone is not None:
+            item['phone'] = phone.strip()
+        if mobile is not None:
+            item['mobile'] = mobile.strip()
+
+
         yield item # full item
 
 
