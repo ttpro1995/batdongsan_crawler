@@ -1,5 +1,7 @@
 THe spider will crawl on: https://batdongsan.com.vn/
 
+Install python 2.7 Anaconda from https://docs.continuum.io/anaconda/install/
+
 Dependency:
 
 ```
