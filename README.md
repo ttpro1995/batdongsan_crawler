@@ -5,6 +5,7 @@ Dependency:
 ```
 pip install scrapy
 pip install scrapy-random-useragent
+pip install beautifulsoup4
 ```
 
 Quick start start:<br>
